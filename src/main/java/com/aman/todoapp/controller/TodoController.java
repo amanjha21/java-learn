@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
+//@CrossOrigin(origins = "*")
 public class TodoController {
 
     @Autowired
@@ -19,18 +21,17 @@ public class TodoController {
     }
 
     @PostMapping("/")
-    public String addTodo(@RequestBody TodoEntity newTodo){
-        todoService.addTodo(newTodo);
-        return "Todo Added";
+    public List<TodoEntity> addTodo(@RequestBody TodoEntity newTodo){
+        return todoService.addTodo(newTodo);
     }
 
     @PutMapping("/")
-    public String updateTodo(@RequestParam String id, @RequestBody TodoEntity updatedTodo){
+    public List<TodoEntity> updateTodo(@RequestParam String id, @RequestBody TodoEntity updatedTodo){
         return todoService.updateTodo(id, updatedTodo);
     }
 
    @DeleteMapping("/")
-    public  String deleteTodo(@RequestParam String id){
+    public  List<TodoEntity> deleteTodo(@RequestParam String id){
         return  todoService.deleteTodo(id);
    }
 

@@ -18,24 +18,25 @@ public class TodoService {
         return allTodos;
     }
 
-    public TodoEntity addTodo(TodoEntity newTodo){
-        return todo.save(newTodo);
+    public List<TodoEntity>  addTodo(TodoEntity newTodo){
+         todo.save(newTodo);
+         return todo.findAll();
     }
 
-    public String updateTodo(String id,TodoEntity updatedTodo){
+    public List<TodoEntity>  updateTodo(String id,TodoEntity updatedTodo){
 
         Optional<TodoEntity> oldTodo = todo.findById(id);
         if(oldTodo.isPresent()){
             updatedTodo.setId(id);
             todo.save(updatedTodo);
-            return "Todo Updated";
+            return todo.findAll();
         }else
-          return "Todo Doesn't Exist";
+          return todo.findAll();
 
     }
 
-    public String deleteTodo(String id){
+    public List<TodoEntity>  deleteTodo(String id){
         todo.deleteById(id);
-        return "Todo Deleted";
+        return todo.findAll();
     }
 }
